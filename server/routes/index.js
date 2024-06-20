@@ -1,6 +1,5 @@
 import express from "express";
 import { Todo } from "../db/index.js";
-import cors from "cors";
 
 const router = express.Router();
 
