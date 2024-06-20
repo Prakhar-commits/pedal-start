@@ -13,7 +13,7 @@ export default function CreateTodo() {
   const navigate = useNavigate();
 
   const handlesaveTodo = async () => {
-    const res = await axios.post("http://localhost:3000/api/todos", {
+    await axios.post("http://localhost:3000/api/todos", {
       title: title,
       description: description,
       date: date ? date.toISOString() : null,
