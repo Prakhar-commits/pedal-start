@@ -6,7 +6,7 @@ import { Dayjs } from "dayjs";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.API_URL;
 
 export default function CreateTodo() {
   const [title, setTitle] = useState("");
