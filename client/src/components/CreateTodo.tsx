@@ -6,6 +6,8 @@ import { Dayjs } from "dayjs";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export default function CreateTodo() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -13,7 +15,7 @@ export default function CreateTodo() {
   const navigate = useNavigate();
 
   const handlesaveTodo = async () => {
-    await axios.post("http://localhost:3000/api/todos", {
+    await axios.post(`${apiUrl}/api/todos`, {
       title: title,
       description: description,
       date: date ? date.toISOString() : null,

@@ -30,6 +30,7 @@ export default function TodoCard({ title, description, date, _id }: Todo) {
   const [editedTitle, setEditedTitle] = useState(title);
   const [editedDescription, setEditedDescription] = useState(description);
   const [editedDate, setEditedDate] = useState<Date | undefined>(date);
+  const apiUrl = process.env.REACT_APP_API_URL;
   const formattedDate = new Date(date).toLocaleDateString();
 
   const handleEditOpen = () => {
@@ -57,10 +58,7 @@ export default function TodoCard({ title, description, date, _id }: Todo) {
       id: _id,
     };
 
-    const response = await axios.put(
-      `http://localhost:3000/api/todos/${_id}`,
-      updatedTodo
-    );
+    const response = await axios.put(`${apiUrl}/api/todos/${_id}`, updatedTodo);
     console.log(response.data);
 
     setEditOpen(false);

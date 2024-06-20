@@ -8,13 +8,13 @@ import { useNavigate } from "react-router-dom";
 export default function Landing() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const navigate = useNavigate();
-
+  const apiUrl = process.env.REACT_APP_API_URL;
   useEffect(() => {
     getTodos();
   }, []);
 
   const getTodos = async () => {
-    const response = await axios.get("http://localhost:3000/api/todos");
+    const response = await axios.get(`${apiUrl}/api/todos`);
     console.log(response.data.todos);
     setTodos(response.data.todos);
   };
