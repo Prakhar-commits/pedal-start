@@ -47,6 +47,7 @@ export default function Landing() {
         >
           {todos.map((todo) => (
             <TodoCard
+              setTodos={setTodos}
               _id={todo._id}
               title={todo.title}
               description={todo.description}

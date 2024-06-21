@@ -24,12 +24,27 @@ export type Todo = {
   _id: String | null;
 };
 
-export default function TodoCard({ title, description, date, _id }: Todo) {
+interface TodoCardProps {
+  title: String;
+  description: String;
+  date: Date;
+  _id: String | null;
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+}
+
+export default function TodoCard({
+  title,
+  description,
+  date,
+  _id,
+  setTodos,
+}: TodoCardProps) {
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
   const [editedDescription, setEditedDescription] = useState(description);
   const [editedDate, setEditedDate] = useState<Date | undefined>(date);
+
   const apiUrl = process.env.API_URL;
   const formattedDate = new Date(date).toLocaleDateString();
 
@@ -38,6 +53,13 @@ export default function TodoCard({ title, description, date, _id }: Todo) {
     setEditedDescription(description);
     setEditedDate(date);
     setEditOpen(true);
+  };
+
+  const handleDelete = async () => {
+    const response = await axios.delete(`${apiUrl}/api/todos/${_id}`);
+    console.log(response.data.todos);
+    setTodos(response.data.todos);
+    setDeleteOpen(false);
   };
 
   const handleSaveChanges = async () => {
@@ -60,7 +82,6 @@ export default function TodoCard({ title, description, date, _id }: Todo) {
 
     const response = await axios.put(`${apiUrl}/api/todos/${_id}`, updatedTodo);
     console.log(response.data);
-
     setEditOpen(false);
   };
 
@@ -82,7 +103,6 @@ export default function TodoCard({ title, description, date, _id }: Todo) {
         </Button>
       </CardActions>
 
-      {/* Edit Dialog */}
       <Dialog open={editOpen} onClose={() => setEditOpen(false)}>
         <DialogTitle>Edit Todo</DialogTitle>
         <DialogContent>
@@ -131,7 +151,7 @@ export default function TodoCard({ title, description, date, _id }: Todo) {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setDeleteOpen(false)}>Cancel</Button>
-          <Button onClick={() => setDeleteOpen(false)} color="error">
+          <Button onClick={handleDelete} color="error">
             Delete
           </Button>
         </DialogActions>
