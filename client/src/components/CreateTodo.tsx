@@ -5,8 +5,7 @@ import axios from "axios";
 import { Dayjs } from "dayjs";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const apiUrl = import.meta.env.API_URL;
+const apiUrl = process.env.API_URL;
 
 export default function CreateTodo() {
   const [title, setTitle] = useState("");

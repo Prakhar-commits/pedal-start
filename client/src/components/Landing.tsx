@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function Landing() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const navigate = useNavigate();
-  const apiUrl = import.meta.env.API_URL;
+  const apiUrl = process.env.API_URL;
   useEffect(() => {
     getTodos();
   }, []);

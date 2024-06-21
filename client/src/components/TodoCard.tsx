@@ -30,7 +30,7 @@ export default function TodoCard({ title, description, date, _id }: Todo) {
   const [editedTitle, setEditedTitle] = useState(title);
   const [editedDescription, setEditedDescription] = useState(description);
   const [editedDate, setEditedDate] = useState<Date | undefined>(date);
-  const apiUrl = import.meta.env.API_URL;
+  const apiUrl = process.env.API_URL;
   const formattedDate = new Date(date).toLocaleDateString();
 
   const handleEditOpen = () => {
