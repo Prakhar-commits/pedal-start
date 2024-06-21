@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TodoCard, { Todo } from "./TodoCard";
 import axios from "axios";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 
@@ -31,6 +31,10 @@ export default function Landing() {
       >
         Create Todo
       </Button>
+      <Typography variant="caption">
+        The Server is on a free tier so please wait a few seconds before it
+        starts to server request, THANK YOU!
+      </Typography>
       <div
         style={{
           display: "flex",
