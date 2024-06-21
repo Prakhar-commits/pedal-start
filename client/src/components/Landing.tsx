@@ -4,11 +4,12 @@ import axios from "axios";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
+import env from "../setupsenv";
 
 export default function Landing() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const navigate = useNavigate();
-  const apiUrl = process.env.API_URL;
+  const apiUrl = env.API_URL;
   useEffect(() => {
     getTodos();
   }, []);
