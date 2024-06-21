@@ -16,7 +16,6 @@ import {
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
-import env from "../setupsenv";
 
 export type Todo = {
   title: String;
@@ -31,7 +30,7 @@ export default function TodoCard({ title, description, date, _id }: Todo) {
   const [editedTitle, setEditedTitle] = useState(title);
   const [editedDescription, setEditedDescription] = useState(description);
   const [editedDate, setEditedDate] = useState<Date | undefined>(date);
-  const apiUrl = env.API_URL;
+  const apiUrl = import.meta.env.API_URL;
   const formattedDate = new Date(date).toLocaleDateString();
 
   const handleEditOpen = () => {
