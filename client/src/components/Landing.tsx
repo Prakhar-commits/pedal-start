@@ -18,6 +18,12 @@ export default function Landing() {
     console.log(response.data.todos);
     setTodos(response.data.todos);
   };
+
+  const handleDelete = async (_id: string) => {
+    const response = await axios.delete(`${apiUrl}/api/todos/${_id}`);
+    console.log(response.data.todos);
+    setTodos(response.data.todos);
+  };
   return (
     <>
       <Typography variant="caption">
@@ -47,7 +53,7 @@ export default function Landing() {
         >
           {todos.map((todo) => (
             <TodoCard
-              setTodos={setTodos}
+              handleDelete={handleDelete}
               _id={todo._id}
               title={todo.title}
               description={todo.description}

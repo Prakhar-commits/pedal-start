@@ -41,7 +41,7 @@ router.put("/todos/:id", async (req, res) => {
 
 router.delete("/todos/:id", async (req, res) => {
   const todoId = req.params.id;
-  await Todo.findOneAndDelete(todoId);
+  await Todo.findOneAndDelete({ _id: todoId });
   const updatedTodos = await Todo.find();
 
   res.status(200).json({ todos: updatedTodos });

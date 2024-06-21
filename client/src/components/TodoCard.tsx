@@ -21,15 +21,15 @@ export type Todo = {
   title: String;
   description: String;
   date: Date;
-  _id: String | null;
+  _id: string;
 };
 
 interface TodoCardProps {
   title: String;
   description: String;
   date: Date;
-  _id: String | null;
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  _id: string;
+  handleDelete: (id: string) => Promise<void>;
 }
 
 export default function TodoCard({
@@ -37,7 +37,7 @@ export default function TodoCard({
   description,
   date,
   _id,
-  setTodos,
+  handleDelete,
 }: TodoCardProps) {
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -53,13 +53,6 @@ export default function TodoCard({
     setEditedDescription(description);
     setEditedDate(date);
     setEditOpen(true);
-  };
-
-  const handleDelete = async () => {
-    const response = await axios.delete(`${apiUrl}/api/todos/${_id}`);
-    console.log(response.data.todos);
-    setTodos(response.data.todos);
-    setDeleteOpen(false);
   };
 
   const handleSaveChanges = async () => {
@@ -151,7 +144,7 @@ export default function TodoCard({
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setDeleteOpen(false)}>Cancel</Button>
-          <Button onClick={handleDelete} color="error">
+          <Button onClick={() => handleDelete(_id)} color="error">
             Delete
           </Button>
         </DialogActions>
